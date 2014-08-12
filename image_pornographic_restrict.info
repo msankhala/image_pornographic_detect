@@ -1,0 +1,5 @@
+name = Image pornographic restrict
+description = Detect uploaded image whether its pornographic or not and restrict them.
+package = image
+version = 7.x-1.0
+core = 7.x
