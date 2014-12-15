@@ -1,0 +1,7 @@
+name = Image pornographic detect
+description = Detect the pornographic images when uploading the image. This enable the detection for image fields.
+package = image
+version = 7.x-1.0
+core = 7.x
+dependencies[] = libraries
+configure = admin/config/media/image-pornographic-detect

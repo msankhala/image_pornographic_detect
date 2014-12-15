@@ -1,0 +1,89 @@
+<?php
+
+/**
+ * @file
+ * Image pornographic detect.
+ * Provide option for pornographic image detection for image field.
+ */
+
+require_once dirname(__FILE__) . '/image_pornographic_detect.field.inc';
+
+/**
+ * Implements hook_menu().
+ */
+function image_pornographic_detect_menu() {
+  $items['admin/config/media/image-pornographic-detect'] = array(
+    'title' => 'Image Pornographic Detection settings',
+    'description' => 'Configure Image Pornographic Detection library options.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('image_pornographic_detect_admin_settings_form'),
+    'access arguments' => array('administer image pornographic detect'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'image_pornographic_detect.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function image_pornographic_detect_permission() {
+  return array(
+    'administer image pornographic detect' => array(
+      'title' => t('Administer image pornographic detect settings'),
+      'description' => t('Configure image pornographic detect settings.'),
+    ),
+  );
+}
+/**
+ * Implements hook_form_FORM_ID_alter() for user_admin_settings().
+ * 
+ * Add user profile image pornographic detect setting on the user settings page.
+ * @see user_admin_settings()
+ */
+function image_pornographic_detect_form_user_admin_settings_alter(&$form, &$form_state, $form_id) {
+  $form['personalization']['pictures']['user_picture_pornographic_detect'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Image Pornographic Detect'),
+    '#description' => t('This settig will enable the pornographic detection when user upload an image. If this option is checked and user upload a pornographic image this will restrict the uploading of image and will show a message. You can configure more options <a href="@pornographic_detect_setting">here</a>.', array('@pornographic_detect_setting' => '/admin/config')),
+    '#default_value' => variable_get('user_picture_pornographic_detect', 1)
+  );
+}
+
+/**
+ * Implements hook_libraries_info().
+ */
+function image_pornographic_detect_libraries_info() {
+  $libraries['php-nudity-detector'] = array(
+    'name' => 'Php Nudity Detector',
+    'vendor url' => 'https://github.com/FreebieStock/php-nudity-detector',
+    'download url' => 'https://github.com/FreebieStock/php-nudity-detector/archive/master.zip',
+    // version information is not specified in library so providing one.
+    'version' => '1.0',
+    'files' => array(
+       // For PHP libraries, specify include files here, still relative to the
+       // library path.
+      'php' => array(
+        'lib/Autoloader.php',
+      ),
+    ),
+  );
+  $libraries['image-nudity-filter'] = array(
+    'name' => 'Image Nudity Filter',
+    'vendor url' => 'http://www.phpclasses.org/package/3269-PHP-Determine-whether-an-image-may-contain-nudity.html',
+    'download url' => 'http://www.phpclasses.org/package/3269-PHP-Determine-whether-an-image-may-contain-nudity.html#download',
+    'version arguments' => array(
+      'file' => 'class.ImageFilter.php',
+      'pattern' => '/Image Filter v(\s+\d+\.+\d+)/',
+      'lines' => 8,
+    ),
+    'files' => array(
+      'php' => array(
+        'class.ImageFilter.php',
+      ),
+    ),
+  );
+
+  return $libraries;
+}
