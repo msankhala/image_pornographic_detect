@@ -12,8 +12,8 @@ Porn image detect for user profile.
 Dependencies:
 [Libraries API](https://www.drupal.org/project/libraries)
 
-Steps
------
+**Steps**
+
 
 - Download and extract module under `sites/all/modules`
 - Download and extract `Libraries` module.
