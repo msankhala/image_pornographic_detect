@@ -36,20 +36,6 @@ function image_pornographic_detect_permission() {
     ),
   );
 }
-/**
- * Implements hook_form_FORM_ID_alter() for user_admin_settings().
- * 
- * Add user profile image pornographic detect setting on the user settings page.
- * @see user_admin_settings()
- */
-function image_pornographic_detect_form_user_admin_settings_alter(&$form, &$form_state, $form_id) {
-  $form['personalization']['pictures']['user_picture_pornographic_detect'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Enable Image Pornographic Detect'),
-    '#description' => t('This settig will enable the pornographic detection when user upload an image. If this option is checked and user upload a pornographic image this will restrict the uploading of image and will show a message. You can configure more options <a href="@pornographic_detect_setting">here</a>.', array('@pornographic_detect_setting' => '/admin/config')),
-    '#default_value' => variable_get('user_picture_pornographic_detect', 1)
-  );
-}
 
 /**
  * Implements hook_libraries_info().
@@ -59,7 +45,7 @@ function image_pornographic_detect_libraries_info() {
     'name' => 'Php Nudity Detector',
     'vendor url' => 'https://github.com/FreebieStock/php-nudity-detector',
     'download url' => 'https://github.com/FreebieStock/php-nudity-detector/archive/master.zip',
-    // version information is not specified in library so providing one.
+    // Version information is not specified in library so providing one.
     'version' => '1.0',
     'files' => array(
        // For PHP libraries, specify include files here, still relative to the
@@ -86,4 +72,40 @@ function image_pornographic_detect_libraries_info() {
   );
 
   return $libraries;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for user_admin_settings().
+ * 
+ * Add user profile image pornographic detect setting on the user settings page.
+ * @see user_admin_settings()
+ */
+function image_pornographic_detect_form_user_admin_settings_alter(&$form, &$form_state, $form_id) {
+  global $base_url;
+  $form['personalization']['pictures']['user_picture_pornographic_detect'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Image Pornographic Detect'),
+    '#description' => t('This settig will enable the pornographic detection when user upload an image. If this option is checked and user upload a pornographic image this will restrict the uploading of image and will show a message. You can configure more options <a href="@pornographic_detect_setting">here</a>.', array('@pornographic_detect_setting' => $base_url . base_path() . 'admin/config/media/image-pornographic-detect')),
+    '#default_value' => variable_get('user_picture_pornographic_detect', 1)
+  );
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function image_pornographic_detect_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
+  dpm($form);
+  dpm($form['picture']['picture']['#value']);
+  $element = $form['picture']['picture_upload'];
+  $form['picture']['picture_upload']['#upload_validators'] = array('image_pornographic_detect_image_validate' => array($element));
+}
+
+/**
+ * Implements hook_field_attach_validate().
+ */
+function image_pornographic_detect_field_attach_validate($entity_type, $entity, &$errors) {
+  if ($entity_type) {
+    // dpm($entity_type);
+    // dpm(field_info_field_map());
+  }
 }
