@@ -19,6 +19,6 @@ Dependencies:
 - Download and extract `Libraries` module.
 - Download one of the library or both.
   - [Php nudity detector](https://github.com/FreebieStock/php-nudity-detector) (recommended)
-  - [Php nudity detector](https://github.com/FreebieStock/php-nudity-detector)
-- Extract and put the library under `sites/all/libraries/
+  - [Image nudity filter](http://www.phpclasses.org/package/3269-PHP-Determine-whether-an-image-may-contain-nudity
+- Extract and put the library under `sites/all/libraries/` and make sure path is `sites/all/libraries/php-nudity-detector` (for php nudity detector library) and `sites/all/libraries/image-nudity-filter` (for Image nudity filter library).
 - Enable the module and configure any `image field` added in content type and check the pornograhpic detection option.
