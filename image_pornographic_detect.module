@@ -94,18 +94,20 @@ function image_pornographic_detect_form_user_admin_settings_alter(&$form, &$form
  * Implements hook_form_alter().
  */
 function image_pornographic_detect_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
-  dpm($form);
-  dpm($form['picture']['picture']['#value']);
-  $element = $form['picture']['picture_upload'];
-  $form['picture']['picture_upload']['#upload_validators'] = array('image_pornographic_detect_image_validate' => array($element));
+  $form['#validate'][] = 'image_pornographic_detect_user_picture_validate';
 }
 
 /**
  * Implements hook_field_attach_validate().
  */
-function image_pornographic_detect_field_attach_validate($entity_type, $entity, &$errors) {
-  if ($entity_type) {
-    // dpm($entity_type);
-    // dpm(field_info_field_map());
+function image_pornographic_detect_user_picture_validate($form, &$form_state) {
+  $image_pornographic_detect_active_library = variable_get('image_pornographic_detect_active_library', 'php-nudity-detector');
+  $temp_file_url = !empty($form_state['values']['picture_upload']) ? drupal_realpath($form_state['values']['picture_upload']->uri) : '';
+  if (($library_found = libraries_detect($image_pornographic_detect_active_library)) && !empty($library_found['installed']) && !empty($temp_file_url)) {
+    $is_porn = image_pornographic_detect_checkporn($image_pornographic_detect_active_library, $temp_file_url);
+    if ($is_porn) {
+      $warning_message = variable_get('image_pornographic_detect_warning_message', '');
+      form_set_error('picture_upload', $warning_message);
+    }
   }
 }
