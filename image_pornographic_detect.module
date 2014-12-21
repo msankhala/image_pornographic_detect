@@ -98,7 +98,7 @@ function image_pornographic_detect_form_user_profile_form_alter(&$form, &$form_s
 }
 
 /**
- * Implements hook_field_attach_validate().
+ * Custom user profile picture validate.
  */
 function image_pornographic_detect_user_picture_validate($form, &$form_state) {
   $user_picture_pornographic_detect = variable_get('user_picture_pornographic_detect', 1);
