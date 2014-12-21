@@ -13,6 +13,19 @@ function image_pornographic_detect_install() {
   variable_set('user_picture_pornographic_detect', 1);
   variable_set('image_pornographic_detect_warning_message', $t('The image you uploaded contain pornographic content. You are not allowed to upload pornographic images. Please choose another image.'));
 }
+
+/**
+ * Implements hook_enable().
+ */
+function image_pornographic_detect_enable() {
+  drupal_set_message(t('The Image pornographic detect module was successfully enabled. Download and extract <a href="@php-nudity-detector" target="_blank">Php nudity detector</a> or <a href="@image_nudity_filter library" target="_blank">Image nudity filter</a> at %library_location See README.md for more detail.',
+    array(
+      '@php-nudity-detector' => 'https://github.com/FreebieStock/php-nudity-detector',
+      '@image_nudity_filter' => 'http://www.phpclasses.org/package/3269-PHP-Determine-whether-an-image-may-contain-nudity.html',
+      '%library_location' => 'sites/all/libraries/php-nudity-detector or sites/all/libraries/image-nudity-filter')
+    ), 'warning', FALSE);
+}
+
 /**
  * Implements hook_uninstall().
  */
