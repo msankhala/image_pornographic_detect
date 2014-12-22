@@ -27,13 +27,13 @@ Dependencies:
 #### Settings
 
 - **Admin setting**
-  ![admin setting](http://i.share.pho.to/c30c1fbc_o.png)
+  ![admin setting](screenshots/admin-setting.png)
 
 - **For image field**
-  ![Image field setting](http://i.share.pho.to/c30c1fbc_o.png)
+  ![Image field setting](screenshots/image-field-setting.png)
 
 - **User profile picture setting**
-  ![User profile picture setting](http://i.share.pho.to/ef559e22_o.png)
+  ![User profile picture setting](screenshots/user-profile-picture-setting.png)
 
 #### Known issue
 **IF you use Image nudity filter library.**
