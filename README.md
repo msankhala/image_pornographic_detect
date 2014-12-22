@@ -24,6 +24,17 @@ Dependencies:
 - Extract and put the library under `sites/all/libraries/` and make sure path is `sites/all/libraries/php-nudity-detector` (for php nudity detector library) and `sites/all/libraries/image-nudity-filter` (for Image nudity filter library).
 - Enable the module and configure any `image field` added in content type and check the pornograhpic detection option.
 
+#### Settings
+
+**Admin setting**
+![admin setting](http://i.share.pho.to/c30c1fbc_o.png "admin setting")
+
+**For image field**
+![Image field setting](http://i.share.pho.to/c30c1fbc_o.png "Image field setting")
+
+**User profile picture setting**
+![User profile picture setting](http://i.share.pho.to/ef559e22_o.png "User profile picture setting.")
+
 #### Known issue
 **IF you use Image nudity filter library.**
 Notice: imagecolorat(): 1,400 is out of bounds in ImageFilter->GetScore() (line 62 of class.ImageFilter.php).
