@@ -1,7 +1,7 @@
 ### Image pornographic detect
 
-A simple drupal module which allow site administor to configure image field to not allow pornographic image upload.
-This module uses two thrid party librarries:
+A simple drupal module which allow site administrator to configure image field to not allow pornographic image upload.
+This module uses two third party libraries:
 - [Php nudity detector](https://github.com/FreebieStock/php-nudity-detector)
 - [Image nudity filter](http://www.phpclasses.org/package/3269-PHP-Determine-whether-an-image-may-contain-nudity.html)
 
