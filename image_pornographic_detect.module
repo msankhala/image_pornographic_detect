@@ -82,11 +82,11 @@ function image_pornographic_detect_libraries_info() {
  */
 function image_pornographic_detect_form_user_admin_settings_alter(&$form, &$form_state, $form_id) {
   global $base_url;
-  $form['personalization']['pictures']['user_picture_pornographic_detect'] = array(
+  $form['personalization']['pictures']['image_pornographic_detect_user_picture'] = array(
     '#type' => 'checkbox',
     '#title' => t('Enable Image Pornographic Detect'),
     '#description' => t('This settig will enable the pornographic detection when user upload an image. If this option is checked and user upload a pornographic image this will restrict the uploading of image and will show a message. You can configure more options <a href="@pornographic_detect_setting">here</a>.', array('@pornographic_detect_setting' => $base_url . base_path() . 'admin/config/media/image-pornographic-detect')),
-    '#default_value' => variable_get('user_picture_pornographic_detect', 1)
+    '#default_value' => variable_get('image_pornographic_detect_user_picture', 1)
   );
 }
 
@@ -101,8 +101,8 @@ function image_pornographic_detect_form_user_profile_form_alter(&$form, &$form_s
  * Custom user profile picture validate.
  */
 function image_pornographic_detect_user_picture_validate($form, &$form_state) {
-  $user_picture_pornographic_detect = variable_get('user_picture_pornographic_detect', 1);
-  if ($user_picture_pornographic_detect) {
+  $image_pornographic_detect_user_picture = variable_get('image_pornographic_detect_user_picture', 1);
+  if ($image_pornographic_detect_user_picture) {
     $image_pornographic_detect_active_library = variable_get('image_pornographic_detect_active_library', 'php-nudity-detector');
     $temp_file_url = !empty($form_state['values']['picture_upload']) ? drupal_realpath($form_state['values']['picture_upload']->uri) : '';
     if (($library_found = libraries_detect($image_pornographic_detect_active_library)) && !empty($library_found['installed']) && !empty($temp_file_url)) {

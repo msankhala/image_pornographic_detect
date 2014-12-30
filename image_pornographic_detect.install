@@ -10,7 +10,7 @@
 function image_pornographic_detect_install() {
   $t = get_t();
   variable_set('image_pornographic_detect_active_library', 'php-nudity-detector');
-  variable_set('user_picture_pornographic_detect', 1);
+  variable_set('image_pornographic_detect_user_picture', 1);
   variable_set('image_pornographic_detect_warning_message', $t('The image you uploaded contain pornographic content. You are not allowed to upload pornographic images. Please choose another image.'));
 }
 
@@ -33,7 +33,7 @@ function image_pornographic_detect_uninstall() {
   /*
    *variable_del('upload_file_types');
    */
-  variable_del('user_picture_pornographic_detect');
+  variable_del('image_pornographic_detect_user_picture');
   variable_del('image_pornographic_detect_active_library');
   variable_del('image_pornographic_detect_warning_message');
 }
